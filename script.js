@@ -16,7 +16,7 @@ function calculateScore() {
     const isH2 = document.getElementById("isH2").checked;
     const isH1 = document.getElementById("isH1").checked;
 
-    if (fourthGrade && !isH1 && !isH2) {
+    if (fourthGrade && fourthGrade !== "None" && !isH1 && !isH2) {
         alert("Please choose if the 4th subject is H1 or H2.");
         return;
     }
@@ -26,7 +26,7 @@ function calculateScore() {
     let extraPoints = 0;
     let fourthLevel = "";
 
-    if (fourthGrade) {
+    if (fourthGrade && fourthGrade !== "None") {
         if (isH2) {
             h2Pool.push(h2Points[fourthGrade]);
             fourthLevel = "H2";
@@ -67,9 +67,10 @@ function calculateScore() {
 
     // 4. UI Updates
     document.getElementById("resultSection").hidden = false;
-    document.getElementById("score").textContent = round2(best.score).toFixed(2);
-    document.getElementById("method").textContent = best.method;
-    document.getElementById("overallScore").textContent = best.formula;
+    document.getElementById("score").textContent = round2(best.score).toFixed(2); // Show best score, rounded to 2 decimals
+    document.getElementById("method").textContent = best.method; // Show best method
+    document.getElementById("overallScore").textContent = best.formula; // Show formula for best method
+    if (best.score >= 70) launchConfetti(), alert("Congratulations! You've achieved a RP of 70! Celebrate your hard work :D 🎉");
 
     // Breakdown Text
     document.getElementById("breakdownSubject1").textContent = `Best H2: ${h2Pool[0]}`;
@@ -88,10 +89,58 @@ function calculateScore() {
 }
 
 function resetCalculator() {
-    ["subject1", "subject2", "subject3", "fourthSubject", "mtl"].forEach(id => document.getElementById(id).value = "");
+    ["subject1", "subject2", "subject3", "mtl"].forEach(id => document.getElementById(id).value = "");
+    document.getElementById("fourthSubject").value = "None";
     document.getElementById("gp").value = "C";
     document.getElementById("isH1").checked = false;
     document.getElementById("isH2").checked = false;
     document.getElementById("resultSection").hidden = true;
 }
+
+// confetti celebration function
+function launchConfetti() {
+    const count = 300;
+    const defaults = { origin: { y: 0.7 } };
+
+    function fire(particleRatio, opts) {
+        confetti({
+            ...defaults,
+            ...opts,
+            particleCount: Math.floor(count * particleRatio)
+        });
+    }
+
+    fire(0.25, {
+        spread: 26,
+        startVelocity: 55,
+    });
+    fire(0.2, {
+        spread: 60,
+    });
+    fire(0.35, {
+        spread: 100,
+        decay: 0.91,
+        scalar: 0.8
+    });
+    fire(0.1, {
+        spread: 120,
+        startVelocity: 25,
+        decay: 0.92,
+        scalar: 1.2
+    });
+    fire(0.1, {
+        spread: 120,
+        startVelocity: 45,
+    });
+}
+
+// dark mode toggle behaviour
+window.addEventListener('DOMContentLoaded', () => {
+    const darkSwitch = document.getElementById('darkSwitch');
+    if (darkSwitch) {
+        darkSwitch.addEventListener('change', () => {
+            document.body.classList.toggle('dark', darkSwitch.checked);
+        });
+    }
+});
 
