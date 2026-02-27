@@ -83,7 +83,7 @@ function calculateScore() {
 
     let notes = best.fInc || best.mInc ? [] : ["No optional subject improved the score."];
     if (best.fInc) notes.push(`4th Sub: ${fourthGrade} (${fourthLevel})`);
-    if (best.mInc) notes.push(`MTL: ${mtlGrade}`);
+    if (best.mInc) notes.push(`MTL: ${mtlGrade} (H1)`);
     document.getElementById("notes").textContent = notes.join(" | ");
 }
 
@@ -94,3 +94,4 @@ function resetCalculator() {
     document.getElementById("isH2").checked = false;
     document.getElementById("resultSection").hidden = true;
 }
+
