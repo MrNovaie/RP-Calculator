@@ -67,6 +67,7 @@ function calculateScore() {
 
     // 4. UI Updates
     document.getElementById("resultSection").hidden = false;
+    document.getElementById("downloadSection").hidden = false;
     document.getElementById("score").textContent = round2(best.score).toFixed(2); // Show best score, rounded to 2 decimals
     document.getElementById("method").textContent = best.method; // Show best method
     document.getElementById("overallScore").textContent = best.formula; // Show formula for best method
@@ -144,3 +145,18 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+function downloadPDF() {
+    const element = document.getElementById('resultSection');
+    element.hidden = false;
+    
+    const opt = {
+        margin: 10,
+        filename: 'A-level 2026 results.pdf',
+        image: { type: 'jpeg', quality: 1 },
+        html2canvas: { scale: 3, useCORS: true, allowTaint: true },
+        jsPDF: { orientation: 'landscape', unit: 'mm', format: 'a4' },
+    };
+    html2pdf().set(opt).from(element).save().then(() => {
+        element.hidden = true;
+    });
+}
