@@ -4,11 +4,12 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>2026 A-level RP calculator</title>
-        <link rel="stylesheet" href="stylev1.1.css">
+        <link rel="stylesheet" href="stylev1.2.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Atma:wght@300;400;500;600;700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Press+Start+2P&display=swap" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" defer></script>
         <script src="script.js" defer></script>
     </head>
     <body>
@@ -113,6 +114,9 @@
         <button id="calculateButton" onclick="calculateScore()">Calculate Score</button>
         <button id="resetButton" onclick="resetCalculator()">Reset</button>
       </section>
+      <section id = "downloadSection" hidden>
+        <button id="download-button" onclick = "downloadPDF()">Download Results as PDF</button>
+      </section>
       <section id="resultSection" hidden>
         <p id="result" style="font-size: 22px;"> <hr> <b>Your UAS (<span style="color: red;">RP</span>) is:</b> <span id="score" style="color: red;">--</span></p>
 
@@ -127,6 +131,7 @@
         <p>Overall score <span id ='method'>--</span> = <span id="overallScore">--</span></p>
         <p>Notes: <span id = 'notes'>--</span></p>
       </section>
+
 
       <section id="footer">
         <hr>
