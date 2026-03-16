@@ -153,7 +153,7 @@ function downloadPDF() {
         margin: 10,
         filename: 'A-level 2026 results.pdf',
         image: { type: 'jpeg', quality: 1 },
-        html2canvas: { scale: 3, useCORS: true, allowTaint: true },
+        html2canvas: { scale: 1, useCORS: true, allowTaint: true },
         jsPDF: { orientation: 'landscape', unit: 'mm', format: 'a4' },
     };
     html2pdf().set(opt).from(element).save().then(() => {
